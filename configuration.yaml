@@ -1,0 +1,41 @@
+# Loads default set of integrations. Do not remove.
+default_config:
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+sensor: !include sensors.yaml
+binary_sensor: !include binary_sensors.yaml
+template: !include templates.yaml
+
+# Load frontend themes from the themes folder
+frontend:
+  themes: !include_dir_merge_named themes
+
+# enable https 
+http:
+  ssl_certificate: /ssl/fullchain.pem
+  ssl_key: /ssl/privkey.pem
+
+# Text to speach
+tts:
+  - platform: google_translate
+    language: 'fr'
+
+# Input Boolean
+input_boolean:
+    machine_a_laver:
+        name: machine_a_laver
+        icon: mdi:washing-machine
+
+# Telegram bot
+telegram_bot:
+  - platform: polling
+    api_key: !secret telegram_token
+    allowed_chat_ids:
+      - !secret id_telegram_group_maison
+      
+notify:
+  - name: Telegram Groupe
+    platform: telegram
+    chat_id: !secret id_telegram_group_maison
