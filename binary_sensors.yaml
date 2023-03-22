@@ -1,0 +1,14 @@
+# Sensor jour de ramassage de la poubelle verte
+- platform: workday
+  country: FR
+  name: jour_poubelle_verte
+  workdays: [mon,thu]
+  excludes: []
+  days_offset: 1
+# Sensor jour de ramassage de la poubelle jaune
+- platform: workday
+  country: FR
+  name: jour_poubelle_jaune
+  workdays: [wed]
+  excludes: []
+  days_offset: 1
