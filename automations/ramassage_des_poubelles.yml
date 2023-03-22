@@ -1,0 +1,28 @@
+alias: Ramassage des poubelles
+description: ""
+trigger:
+  - platform: time
+    at: "19:30:00"
+condition:
+  - condition: or
+    conditions:
+      - condition: and
+        conditions:
+          - condition: state
+            entity_id: binary_sensor.jour_poubelle_verte
+            state: "on"
+      - condition: and
+        conditions:
+          - condition: state
+            entity_id: binary_sensor.jour_poubelle_jaune
+            state: "on"
+action:
+  - service: notify.telegram_groupe
+    data:
+      message: |-
+        {% if states.binary_sensor.jour_poubelle_verte.state == "on" %}
+          🚛 Le camion poubelle passe demain !
+        {% elif states.binary_sensor.jour_poubelle_jaune.state == "on" %}
+          ♻️ Le tri sélectif passe demain !
+        {% endif %}
+mode: single
