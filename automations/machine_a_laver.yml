@@ -21,4 +21,8 @@ action:
   - service: notify.telegram_groupe
     data:
       message: 🧺 Le linge est propre ! Il faut vider la machine.
+  - service: input_boolean.turn_off
+    data: {}
+    target:
+      entity_id: input_boolean.machine_a_laver
 mode: single
